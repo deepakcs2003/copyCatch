@@ -11,9 +11,15 @@ def est_jaccard(submission_id1, submission_id2):
     
     sig1 = doc1.get("minhash_signature")
     sig2 = doc2.get("minhash_signature")
+    # print("sig 1" ,sig1)
+    # print("sig 2" ,sig2)
     
     if sig1 is None or sig2 is None:
         raise ValueError("MinHash signature missing for one or both submissions.")
     
     matches = sum(1 for a, b in zip(sig1, sig2) if a == b)
-    return matches / len(sig1)
+    # print("inside Sim Score " , len(sig1))
+    score=matches / len(sig1)
+    # print("Out Sim Score")
+    # print(score)
+    return score

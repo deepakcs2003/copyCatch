@@ -50,11 +50,13 @@ def extract_text_from_docx(path):
 
 def preprocess_text(text):
     text = text.lower()
+    print("Lowercase text:", text)
     text = text.translate(str.maketrans("", "", string.punctuation))
     stop_words = set(stopwords.words("english"))
     words = [w for w in text.split() if w not in stop_words]
     lemmatizer = WordNetLemmatizer()
     lemmatized_words = [lemmatizer.lemmatize(w, pos="v") for w in words]
+    print("Lemmatized text:", " ".join(lemmatized_words))
     return " ".join(lemmatized_words)
 
 def extract_and_preprocess(url,assignment_id,submission_id):
@@ -63,6 +65,7 @@ def extract_and_preprocess(url,assignment_id,submission_id):
     ext = os.path.splitext(path)[1].lower()
     if ext == ".pdf":
         raw_text = extract_text_from_pdf(path)
+        print("extracted text",raw_text)
     elif ext == ".docx":
         raw_text = extract_text_from_docx(path)
     else:
@@ -70,12 +73,12 @@ def extract_and_preprocess(url,assignment_id,submission_id):
     
     end=time.perf_counter()
     print(f"Time taken to download and extract text: {end - start:.2f} seconds")
-
+    print("downloaded")
     start=time.perf_counter()
     processed_text = preprocess_text(raw_text)
     end=time.perf_counter()
     print(f"Time taken to preprocess text: {end - start:.2f} seconds")
-
+    print("preprocessed extracted text", processed_text)
     start=time.perf_counter()
     shingles=get_shingles(processed_text)
     # print("Shingles",shingles)

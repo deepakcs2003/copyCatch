@@ -12,4 +12,4 @@ def make_hash_funcs(num_funcs=200):
 
     # Store in DB
     hash_funcs_col.insert_one({"num_funcs": num_funcs, "funcs": funcs_params})
-    return funcs_params  # optionally return the parameters
+ 

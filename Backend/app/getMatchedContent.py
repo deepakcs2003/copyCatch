@@ -47,5 +47,5 @@ def longest_common_chunks(submission_id1, submission_id2, min_len: int = 10):
                     results.pop()
                 results.append(substring)
                 last_end = end
-    
+    # print("results is here", results)
     return results
